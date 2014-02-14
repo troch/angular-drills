@@ -4,7 +4,7 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
-    <title>1.1 Filtered Ng-repeat</title>
+    <title>1.2 Filtered Ng-repeat (2)</title>
     <STYLE type="text/css">
         body { font-family: "Palatino", "Arial"; }
         a, a:hover { color: black;} a:hover{text-decoration: none}
@@ -40,14 +40,15 @@
             &nbsp;&nbsp;&nbsp;During part one, all drills have to be performed <span class="u">without the use of any controller or custom directive.</span>
         </div>
 
-        <h3>Drill 1.1 Ng-repeat with a filter</h3>
+        <h3>Drill 1.2 Ng-repeat with a filter (2)</h3>
 
         <div id="drill">
-            Display in a list all continents provided by the ngInit directive, sorted alphabetically.
+            Add a control to sort the list alphabetically in ascending or descending order.
         </div>
 
         <div id="help">
             <ul>
+                <li>Ng-click directive: <a href="http://docs.angularjs.org/api/ng.directive:ngClick">http://docs.angularjs.org/api/ng.directive:ngClick</a></li>
                 <li>Ng-repeat directive: <a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">http://docs.angularjs.org/api/ng.directive:ngRepeat</a></li>
                 <li>Filters: <a href="http://docs.angularjs.org/api/ng.filter:filter">http://docs.angularjs.org/api/ng.filter:filter</a></li>
             </ul>
@@ -58,6 +59,9 @@
         <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}]">
 
             <!-- Do your magic here !-->
+            <ul>
+                <li ng-repeat="continent in continents | orderBy:'name'" ng-bind="continent.name"></li>
+            </ul>
 
         </div>
 
