@@ -24,3 +24,4 @@ List of drills (with tags):
 - 1.1: Filtered ng-repeat
 - 1.2: Filtered ng-repeat (2)
 - 1.3: Nested ng-repeat with filters
+- 1.4: Filtering objects by field
