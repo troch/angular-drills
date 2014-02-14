@@ -23,3 +23,4 @@ During part one, all drills have to be performed `without the use of any control
 List of drills (with tags):
 - 1.1: Filtered ng-repeat
 - 1.2: Filtered ng-repeat (2)
+- 1.3: Nested ng-repeat with filters

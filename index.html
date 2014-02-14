@@ -4,7 +4,7 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
-    <title>1.2 Filtered Ng-repeat (2)</title>
+    <title>1.3 Nested ng-repeat with filters - Angular drills</title>
     <STYLE type="text/css">
         body { font-family: "Palatino", "Arial"; }
         a, a:hover { color: black;} a:hover{text-decoration: none}
@@ -40,10 +40,11 @@
             &nbsp;&nbsp;&nbsp;During part one, all drills have to be performed <span class="u">without the use of any controller or custom directive.</span>
         </div>
 
-        <h3>Drill 1.2 Ng-repeat with a filter (2)</h3>
+        <h3>Drill 1.3 Nested ng-repeat with filters</h3>
 
         <div id="drill">
-            Add a control to sort the list alphabetically in ascending or descending order.
+            Using two ng-repeat directives (nested), display a 2 levels list with continents at the top level and countries at the bottom level.<br/>
+            Countries need to be correctly listed below the continent they are in. Countries are available in the scope (variable `countries`, see in ng-init directive).
         </div>
 
         <div id="help">
@@ -56,11 +57,16 @@
 
         <div class="separator"> </div>
 
-        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}]">
+        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe'},{name:'Canada',continent:'North America'},{name:'China',continent:'Asia'},{name:'Algeria',continent:'Africa'},{name:'Italy',continent:'Europe'},{name:'Fidji',continent:'Oceania'},{name:'Vietnam',continent:'Asia'},{name:'India',continent:'Asia'},{name:'Kenya',continent:'Africa'},{name:'Brasil',continent:'South America'},{name:'Japan',continent:'Asia'},{name:'Argentina',continent:'South America'},{name:'Austria',continent:'Europe'},{name:'Ivory Coast',continent:'Africa'}];">
 
-            <!-- Do your magic here !-->
+            <p>
+                <button ng-click="reverse=!reverse" ng-bind="reverse ? 'Ascending' : 'Descending'"></button>
+            </p>
             <ul>
-                <li ng-repeat="continent in continents | orderBy:'name'" ng-bind="continent.name"></li>
+                <li ng-repeat="continent in continents | orderBy:'name':reverse">
+                    <span ng-bind="continent.name"></span>
+                    <!-- Do your magic here -->
+                </li>
             </ul>
 
         </div>
