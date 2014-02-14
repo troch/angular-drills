@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html ng-app>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <title>1.1 Filtered Ng-repeat</title>
+    <STYLE type="text/css">
+        body { font-family: "Palatino", "Arial"; }
+        a, a:hover { color: black;} a:hover{text-decoration: none}
+        #page { width: 70%; max-width: 980px; min-height: 400px; margin: 20px auto; padding: 20px; box-shadow: 3px 0 5px #cacaca;-webkit-box-shadow: 0 0 5px #cacaca;-moz-box-shadow: 0 0 5px #cacaca;}
+        header {border-bottom: 1px solid #cacaca;}
+        h1, h2 {text-align: center; font-weight: normal; margin: 5px;}
+        h2 { font-style: italic;}
+        h3 { font-weight: bold; font-size: 1.2em; background-color: #f5f5f5;}
+        #aim {background-color: #f5f5f5;}
+        #drill {border: 2px solid #5CB8E6; color: #3D7A99; background-color: #D1F0FF; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; padding: 15px; }
+        .u {text-decoration: underline;}
+        #help {font-family: "Courier New", "Courier"; padding: 10px;}
+        #aim, #drill, h3, #help {box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; margin-top: 15px;padding: 20px; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px;}
+        #help ul {list-style: none; margin: 0; padding: 0;}
+        .separator {border-bottom: 1px solid #CACACA; background-color: #CACACA;}
+        #your-part {min-height: 100px;}
+     </STYLE>
+<head>
+
+
+
+<body>
+
+    <div id="page">
+
+        <header>
+            <h1>Angular drills</h1>
+            <h2>Part 1: working in the view</h2>
+        </header>
+
+        <div id="aim">&nbsp;&nbsp;&nbsp;The aim of "Angular drills part 1" is to focus on the view by using native angularJS directives,
+            to play with UI states and to resist the temptation to use controllers or directives.<br/>
+            &nbsp;&nbsp;&nbsp;During part one, all drills have to be performed <span class="u">without the use of any controller or custom directive.</span>
+        </div>
+
+        <h3>Drill 1.1 Ng-repeat with a filter</h3>
+
+        <div id="drill">
+            Display in a list all continents provided by the ngInit directive, sorted alphabetically.
+        </div>
+
+        <div id="help">
+            <ul>
+                <li>Ng-repeat directive: <a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">http://docs.angularjs.org/api/ng.directive:ngRepeat</a></li>
+                <li>Filters: <a href="http://docs.angularjs.org/api/ng.filter:filter">http://docs.angularjs.org/api/ng.filter:filter</a></li>
+            </ul>
+        </div>
+
+        <div class="separator"> </div>
+
+        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}]">
+
+            <!-- Do your magic here !-->
+
+        </div>
+
+</body>
+
+</html>
+
