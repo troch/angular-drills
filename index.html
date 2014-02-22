@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app ng-init="drill='1.4 Filtering objects by field'">
+<html ng-app ng-init="drill='1.5 Counting filtering results'">
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
@@ -43,14 +43,15 @@
         <h3 ng-bind-template="Drill {{drill}}"></h3>
 
         <div id="drill">
-            Using an input field, filter the countries by name.
+            - Display the number of countries visible<br/>
+            - Only display a continent name if there is a list of countries to display for it (in other words: if the search doesn't return any result for a continent, don't display its name!)
         </div>
 
         <div id="help">
             <ul>
-                <li>Ng-click directive: <a href="http://docs.angularjs.org/api/ng.directive:ngClick">http://docs.angularjs.org/api/ng.directive:ngClick</a></li>
-                <li>Ng-repeat directive: <a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">http://docs.angularjs.org/api/ng.directive:ngRepeat</a></li>
+                <li>Ng-show directive: <a href="http://docs.angularjs.org/api/ng.directive:ngShow">http://docs.angularjs.org/api/ng.directive:ngClick</a></li>
                 <li>Filters: <a href="http://docs.angularjs.org/api/ng.filter:filter">http://docs.angularjs.org/api/ng.filter:filter</a></li>
+                <li>Ng-pluralize directive: <a href="http://docs.angularjs.org/api/ng/directive/ngPluralize">http://docs.angularjs.org/api/ng/directive/ngPluralize</a>
             </ul>
         </div>
 
@@ -59,14 +60,15 @@
         <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe'},{name:'Canada',continent:'North America'},{name:'China',continent:'Asia'},{name:'Algeria',continent:'Africa'},{name:'Italy',continent:'Europe'},{name:'Fidji',continent:'Oceania'},{name:'Vietnam',continent:'Asia'},{name:'India',continent:'Asia'},{name:'Kenya',continent:'Africa'},{name:'Brasil',continent:'South America'},{name:'Japan',continent:'Asia'},{name:'Argentina',continent:'South America'},{name:'Austria',continent:'Europe'},{name:'Ivory Coast',continent:'Africa'},{name:'South Africa',continent:'Africa'},{name:'Tunisia',continent:'Africa'},{name:'Denmark',continent:'Europe'},{name:'Thailand',continent:'Asia'},{name:'United States of America',continent:'North America'},{name:'Slovenia',continent:'Europe'},{name:'New Zealand',continent:'Oceania'},{name:'Australia',continent:'Oceania'},{name:'Mexico',continent:'North America'},{name:'Chile',continent:'South America'},{name:'Peru',continent:'South America'}];">
 
             <p>
-                <!-- Do your magic here -->
+                <input type="text" ng-model="search" />
                 <button ng-click="reverse=!reverse" ng-bind="reverse ? 'Ascending' : 'Descending'"></button>
+                <!-- Do some magic here -->
             </p>
             <ul>
-                <li ng-repeat="continent in continents | orderBy:'name':reverse">
+                <li ng-repeat="continent in continents | orderBy:'name':reverse"><!-- And around here -->
                     <span ng-bind="continent.name"></span>
                     <ul>
-                        <li ng-repeat="country in countries | filter:{continent:continent.name}" ng-bind="country.name"></li>
+                        <li ng-repeat="country in countries | filter:search | filter:{continent:continent.name}" ng-bind="country.name"></li>
                     </ul>
                 </li>
             </ul>
