@@ -62,10 +62,10 @@
             <p>
                 <input type="text" ng-model="search" />
                 <button ng-click="reverse=!reverse" ng-bind="reverse ? 'Ascending' : 'Descending'"></button>
-                <!-- Do some magic here -->
+                <ng-pluralize count="(countries | filter:search).length" when="{0: 'No countries found', 'one': 'Displaying 1 country', 'other': 'Displaying {} countries'}"> </ng-pluralize>
             </p>
             <ul>
-                <li ng-repeat="continent in continents | orderBy:'name':reverse"><!-- And around here -->
+                <li ng-repeat="continent in continents | orderBy:'name':reverse" ng-show="(countries | filter:search | filter:{continent:continent.name}).length > 0">
                     <span ng-bind="continent.name"></span>
                     <ul>
                         <li ng-repeat="country in countries | filter:search | filter:{continent:continent.name}" ng-bind="country.name"></li>
