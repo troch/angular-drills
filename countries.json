@@ -1,0 +1,129 @@
+[
+    {
+        name: 'France',
+        continent:'Europe',
+        area: 640679,
+    },
+    {
+        name: 'Canada',
+        continent:'North America',
+        area: 9984670
+    },
+    {
+        name: 'China',
+        continent:'Asia',
+        area: 9706961
+    },
+    {
+        name: 'Algeria',
+        continent:'Africa',
+        area: 2381741
+
+    },
+    {
+        name: 'Italy',
+        continent:'Europe',
+        area: 301336
+    },
+    {
+        name: 'Fiji',
+        continent:'Oceania',
+        area: 18272
+    },
+    {
+        name: 'Vietnam',
+        continent:'Asia',
+        area: 331212
+    },
+    {
+        name: 'India',
+        continent:'Asia',
+        area: 3287590
+    },
+    {
+        name: 'Kenya',
+        continent:'Africa',
+        area: 580367
+    },
+    {
+        name: 'Brasil',
+        continent:'South America',
+        area: 8515767
+    },
+    {
+        name: 'Japan',
+        continent:'Asia',
+        area: 377930
+
+    },
+    {
+        name: 'Argentina',
+        continent:'South America',
+        area: 2780400
+    },
+    {
+        name: 'Austria',
+        continent:'Europe',
+        area: 83871
+    },
+    {
+        name: 'Côte d\'Ivoire',
+        continent:'Africa',
+        area: 322463
+    },
+    {
+        name: 'South Africa',
+        continent:'Africa',
+        area: 1221037
+    },
+    {
+        name: 'Tunisia',
+        continent:'Africa',
+        area: 163610
+    },
+    {
+        name: 'Denmark',
+        continent:'Europe',
+        area: 43094
+    },
+    {
+        name: 'Thailand',
+        continent:'Asia',
+        area: 513120
+    },
+    {
+        name: 'United States of America',
+        continent:'North America',
+        area: 9629091
+    },
+    {
+        name: 'Slovenia',
+        continent:'Europe',
+        area: 20273
+    },
+    {
+        name: 'New Zealand',
+        continent:'Oceania',
+        area: 270467
+    },
+    {
+        name: 'Australia',
+        continent:'Oceania',
+        area: 7692024
+    },
+    {
+        name: 'Mexico',
+        continent:'North America',
+        area: 1964375
+    },
+    {
+        name: 'Chile',
+        continent:'South America',
+        area: 756102
+    },
+    {
+        name: 'Peru',
+        continent:'South America',
+        area: 1285216
+    }
+]

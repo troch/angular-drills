@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app ng-init="drill='1.6 Adding controls and bootstrap css'">
+<html ng-app ng-init="drill='1.7 First visualisation step'">
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
@@ -27,8 +27,6 @@
      </style>
 <head>
 
-
-
 <body>
 
     <div id="page">
@@ -46,23 +44,24 @@
         <h3 ng-bind-template="Drill {{drill}}"></h3>
 
         <div id="drill" ng-init="showScreenshot=false;">
-            - Display all the countries in a same list (no continents)<br/>
-            - Add a dropdown to sort by name ascending and descending<br/>
-            - Display a label per continent (using ng-repeat) with the number of countries displayed for each continent<br/>
+            - Countries have now a new property available: area (in square km)<br/>
+            - Add two choices in the dropdown to order by area (ascending and descending)</br>
+            - Next to each country name, displays a bar according to the size of their area. A variable 'maxArea' (equals to {{10000000 | number}}) has been added to help sizing each bar<br/>
             <button class="btn btn-info" ng-click="showScreenshot=!showScreenshot" ng-bind="showScreenshot ? 'Hide screenshot' : 'Show screenshot'"></button>
-            <img src="screenshots/1.6.png" ng-show="showScreenshot" width="100%">
+            <img src="screenshots/1.7.png" ng-show="showScreenshot" width="100%">
         </div>
 
         <div id="help">
             <ul>
                 <li>Bootstrap css docs: <a href="http://getbootstrap.com/css">http://getbootstrap.com/css/#forms</a></li>
-                <li>Filters: <a href="http://docs.angularjs.org/api/ng.filter:filter">http://docs.angularjs.org/api/ng.filter:filter</a></li>
+                <li>ngStyle: <a href="http://docs.angularjs.org/api/ng/directive/ngStyle">http://docs.angularjs.org/api/ng/directive/ngStyle</a></li>
+                <li>ngAttr attribute binding: <a href="http://docs.angularjs.org/guide/directive">http://docs.angularjs.org/guide/directive</a></li>
             </ul>
         </div>
 
         <div class="separator"> </div>
 
-        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe'},{name:'Canada',continent:'North America'},{name:'China',continent:'Asia'},{name:'Algeria',continent:'Africa'},{name:'Italy',continent:'Europe'},{name:'Fidji',continent:'Oceania'},{name:'Vietnam',continent:'Asia'},{name:'India',continent:'Asia'},{name:'Kenya',continent:'Africa'},{name:'Brasil',continent:'South America'},{name:'Japan',continent:'Asia'},{name:'Argentina',continent:'South America'},{name:'Austria',continent:'Europe'},{name:'Ivory Coast',continent:'Africa'},{name:'South Africa',continent:'Africa'},{name:'Tunisia',continent:'Africa'},{name:'Denmark',continent:'Europe'},{name:'Thailand',continent:'Asia'},{name:'United States of America',continent:'North America'},{name:'Slovenia',continent:'Europe'},{name:'New Zealand',continent:'Oceania'},{name:'Australia',continent:'Oceania'},{name:'Mexico',continent:'North America'},{name:'Chile',continent:'South America'},{name:'Peru',continent:'South America'}];">
+        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe',area:640427},{name:'Canada',continent:'North America',area:9093507},{name:'China',continent:'Asia',area:9569901},{name:'Algeria',continent:'Africa',area:2381741},{name:'Italy',continent:'Europe',area:294140},{name:'Fiji',continent:'Oceania',area:18274},{name:'Vietnam',continent:'Asia',area:310070},{name:'India',continent:'Asia',area:2973193},{name:'Kenya',continent:'Africa',area:569140},{name:'Brasil',continent:'South America',area:8460415},{name:'Japan',continent:'Asia',area:364485},{name:'Argentina',continent:'South America',area:2736690},{name:'Austria',continent:'Europe',area:82445},{name:'Ivory Coast',continent:'Africa',area:318003},{name:'South Africa',continent:'Africa',area:1214470},{name:'Tunisia',continent:'Africa',area:155360},{name:'Denmark',continent:'Europe',area:42434},{name:'Thailand',continent:'Asia',area:510890},{name:'United States of America',continent:'North America',area:9158960},{name:'Slovenia',continent:'Europe',area:20151},{name:'New Zealand',continent:'Oceania',area:262443},{name:'Australia',continent:'Oceania',area:7682300},{name:'Mexico',continent:'North America',area:1943945},{name:'Chile',continent:'South America',area:743812},{name:'Peru',continent:'South America',area:1279996}];order='+name';maxArea=10000000;">
 
 
             <!-- Controls -->
@@ -73,21 +72,30 @@
                         <input type="text" ng-model="search" class="form-control"/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Order countries by</label>
+                    <div class="col-sm-6">
+                        <select ng-model="order" class="form-control">
+                            <option value="+name">Name (A-Z)</option>
+                            <option value="-name">Name (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
                         <ng-pluralize count="(countries | filter:search).length" when="{0: 'No countries found', 'one': 'Displaying 1 country', 'other': 'Displaying {} countries'}"> </ng-pluralize>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <span ng-repeat="continent in continents | orderBy:'name'" ng-bind-template="{{continent.name}} ({{(countries | filter:search | filter:{continent:continent.name}).length}})" class="label label-primary"></span>
                     </div>
                 </div>
             </form>
 
             <!-- countries -->
             <ul>
-                <li ng-repeat="continent in continents | orderBy:'name':reverse" ng-show="(countries | filter:search | filter:{continent:continent.name}).length > 0">
-                    <span ng-bind="continent.name"></span>
-                    <ul>
-                        <li ng-repeat="country in countries | filter:search | filter:{continent:continent.name}" ng-bind="country.name"></li>
-                    </ul>
-                </li>
+                <li ng-repeat="country in countries | filter:search | orderBy:order" ng-bind="country.name">z</li>
             </ul>
 
         </div>
