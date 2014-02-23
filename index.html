@@ -24,7 +24,7 @@
         #your-part {min-height: 100px;}
         .separator {margin-bottom: 20px;}
         .label {margin-right: 10px;}
-        .area-bar {background-color: #336699; margin: 2px 0;}
+        .area-bar {background-color: #336699;margin: 2px 0;}
         form {margin-bottom: 15px;}
      </style>
 <head>
@@ -63,7 +63,7 @@
 
         <div class="separator"> </div>
 
-        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe',area:640679},{name:'Canada',continent:'North America',area:9984670},{name:'China',continent:'Asia',area:9706961},{name:'Algeria',continent:'Africa',area:2381741},{name:'Italy',continent:'Europe',area:301336},{name:'Fiji',continent:'Oceania',area:18272},{name:'Vietnam',continent:'Asia',area:331212},{name:'India',continent:'Asia',area:3287590},{name:'Kenya',continent:'Africa',area:580367},{name:'Brasil',continent:'South America',area:8515767},{name:'Japan',continent:'Asia',area:377930},{name:'Argentina',continent:'South America',area:2780400},{name:'Austria',continent:'Europe',area:83871},{name:'Côte d\'Ivoire',continent:'Africa',area:322463},{name:'South Africa',continent:'Africa',area:1221037},{name:'Tunisia',continent:'Africa',area:163610},{name:'Denmark',continent:'Europe',area:43094},{name:'Thailand',continent:'Asia',area:513120},{name:'United States of America',continent:'North America',area:9629091},{name:'Slovenia',continent:'Europe',area:20273},{name:'New Zealand',continent:'Oceania',area:270467},{name:'Australia',continent:'Oceania',area:7692024},{name:'Mexico',continent:'North America',area:1964375},{name:'Chile',continent:'South America',area:756102},{name:'Peru',continent:'South America',area:1285216}];order='-area';maxArea=10000000;">
+        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe',area:640679},{name:'Canada',continent:'North America',area:9984670},{name:'China',continent:'Asia',area:9706961},{name:'Algeria',continent:'Africa',area:2381741},{name:'Italy',continent:'Europe',area:301336},{name:'Fiji',continent:'Oceania',area:18272},{name:'Vietnam',continent:'Asia',area:331212},{name:'India',continent:'Asia',area:3287590},{name:'Kenya',continent:'Africa',area:580367},{name:'Brasil',continent:'South America',area:8515767},{name:'Japan',continent:'Asia',area:377930},{name:'Argentina',continent:'South America',area:2780400},{name:'Austria',continent:'Europe',area:83871},{name:'Côte d\'Ivoire',continent:'Africa',area:322463},{name:'South Africa',continent:'Africa',area:1221037},{name:'Tunisia',continent:'Africa',area:163610},{name:'Denmark',continent:'Europe',area:43094},{name:'Thailand',continent:'Asia',area:513120},{name:'United States of America',continent:'North America',area:9629091},{name:'Slovenia',continent:'Europe',area:20273},{name:'New Zealand',continent:'Oceania',area:270467},{name:'Australia',continent:'Oceania',area:7692024},{name:'Mexico',continent:'North America',area:1964375},{name:'Chile',continent:'South America',area:756102},{name:'Peru',continent:'South America',area:1285216}];search='';order='-area';maxArea=10000000;">
 
 
             <!-- Controls -->
@@ -71,9 +71,10 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Filter countries</label>
                     <div class="col-sm-6">
-                        <input type="text" ng-model="search" class="form-control" />
+                        <input type="text" ng-model="search" class="form-control" ng-change="maxArea=(countries | filter:search | orderBy:'-area' | limitTo:1)[0].area"/>
                     </div>
                 </div>
+                {{maxCountry}}
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Order countries by</label>
                     <div class="col-sm-6">
@@ -92,7 +93,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
-                        <span ng-repeat="continent in continents | orderBy:'name'" ng-bind-template="{{continent.name}} ({{(countries | filter:search | filter:{continent:continent.name}).length}})" class="label label-primary"></span>
+                        <span ng-repeat="continent in continents | orderBy:'name'" ng-bind-template="{{continent.name}} ({{(countries | filter:search | filter:{continent:continent.name}).length}})" class="label label-default" ng-class="{'label-primary': (countries | filter:search | filter:{continent:continent.name}).length > 0}"></span>
                     </div>
                 </div>
             </form>
