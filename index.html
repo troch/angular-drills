@@ -1,14 +1,15 @@
 <!doctype html>
 
-<html ng-app ng-init="drill='1.5 Counting filtering results'">
+<html ng-app ng-init="drill='1.6 Adding controls and bootstrap css'">
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
     <title ng-bind-template="{{drill}} - Angular drills"></title>
-    <STYLE type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
         body { font-family: "Palatino", "Arial"; }
         a, a:hover { color: black;} a:hover{text-decoration: none}
-        #page { width: 70%; max-width: 980px; min-height: 400px; margin: 20px auto; padding: 20px; box-shadow: 3px 0 5px #cacaca;-webkit-box-shadow: 0 0 5px #cacaca;-moz-box-shadow: 0 0 5px #cacaca;}
+        #page { width: 75%; max-width: 980px; min-height: 400px; margin: 20px auto; padding: 20px; box-shadow: 3px 0 5px #cacaca;-webkit-box-shadow: 0 0 5px #cacaca;-moz-box-shadow: 0 0 5px #cacaca;}
         header {border-bottom: 1px solid #cacaca;}
         h1, h2 {text-align: center; font-weight: normal; margin: 5px;}
         h2 { font-style: italic;}
@@ -21,7 +22,9 @@
         #help ul {list-style: none; margin: 0; padding: 0;}
         .separator {border-bottom: 1px solid #CACACA; background-color: #CACACA;}
         #your-part {min-height: 100px;}
-     </STYLE>
+        .separator {margin-bottom: 20px;}
+        .label {margin-right: 10px;}
+     </style>
 <head>
 
 
@@ -42,16 +45,18 @@
 
         <h3 ng-bind-template="Drill {{drill}}"></h3>
 
-        <div id="drill">
-            - Display the number of countries visible<br/>
-            - Only display a continent name if there is a list of countries to display for it (in other words: if the search doesn't return any result for a continent, don't display its name!)
+        <div id="drill" ng-init="showScreenshot=false;">
+            - Display all the countries in a same list (no continents)<br/>
+            - Add a dropdown to sort by name ascending and descending<br/>
+            - Display a label per continent (using ng-repeat) with the number of countries displayed for each continent<br/>
+            <button class="btn btn-info" ng-click="showScreenshot=!showScreenshot" ng-bind="showScreenshot ? 'Hide screenshot' : 'Show screenshot'"></button>
+            <img src="screenshots/1.6.png" ng-show="showScreenshot" width="100%">
         </div>
 
         <div id="help">
             <ul>
-                <li>Ng-show directive: <a href="http://docs.angularjs.org/api/ng.directive:ngShow">http://docs.angularjs.org/api/ng.directive:ngClick</a></li>
+                <li>Bootstrap css docs: <a href="http://getbootstrap.com/css">http://getbootstrap.com/css/#forms</a></li>
                 <li>Filters: <a href="http://docs.angularjs.org/api/ng.filter:filter">http://docs.angularjs.org/api/ng.filter:filter</a></li>
-                <li>Ng-pluralize directive: <a href="http://docs.angularjs.org/api/ng/directive/ngPluralize">http://docs.angularjs.org/api/ng/directive/ngPluralize</a>
             </ul>
         </div>
 
@@ -59,11 +64,23 @@
 
         <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe'},{name:'Canada',continent:'North America'},{name:'China',continent:'Asia'},{name:'Algeria',continent:'Africa'},{name:'Italy',continent:'Europe'},{name:'Fidji',continent:'Oceania'},{name:'Vietnam',continent:'Asia'},{name:'India',continent:'Asia'},{name:'Kenya',continent:'Africa'},{name:'Brasil',continent:'South America'},{name:'Japan',continent:'Asia'},{name:'Argentina',continent:'South America'},{name:'Austria',continent:'Europe'},{name:'Ivory Coast',continent:'Africa'},{name:'South Africa',continent:'Africa'},{name:'Tunisia',continent:'Africa'},{name:'Denmark',continent:'Europe'},{name:'Thailand',continent:'Asia'},{name:'United States of America',continent:'North America'},{name:'Slovenia',continent:'Europe'},{name:'New Zealand',continent:'Oceania'},{name:'Australia',continent:'Oceania'},{name:'Mexico',continent:'North America'},{name:'Chile',continent:'South America'},{name:'Peru',continent:'South America'}];">
 
-            <p>
-                <input type="text" ng-model="search" />
-                <button ng-click="reverse=!reverse" ng-bind="reverse ? 'Ascending' : 'Descending'"></button>
-                <ng-pluralize count="(countries | filter:search).length" when="{0: 'No countries found', 'one': 'Displaying 1 country', 'other': 'Displaying {} countries'}"> </ng-pluralize>
-            </p>
+
+            <!-- Controls -->
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Filter countries</label>
+                    <div class="col-sm-6">
+                        <input type="text" ng-model="search" class="form-control"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <ng-pluralize count="(countries | filter:search).length" when="{0: 'No countries found', 'one': 'Displaying 1 country', 'other': 'Displaying {} countries'}"> </ng-pluralize>
+                    </div>
+                </div>
+            </form>
+
+            <!-- countries -->
             <ul>
                 <li ng-repeat="continent in continents | orderBy:'name':reverse" ng-show="(countries | filter:search | filter:{continent:continent.name}).length > 0">
                     <span ng-bind="continent.name"></span>
