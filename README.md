@@ -27,3 +27,5 @@ List of drills (with tags):
 - 1.4: Filtering objects by field
 - 1.5: Counting filtering results
 - 1.6: Adding controls and bootstrap css
+- 1.7: First visualisation step
+- 1.8: Improving visualisation

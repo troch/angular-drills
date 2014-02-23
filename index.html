@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app ng-init="drill='1.7 First visualisation step'">
+<html ng-app ng-init="drill='1.8 Improving visualisation'">
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
@@ -24,6 +24,8 @@
         #your-part {min-height: 100px;}
         .separator {margin-bottom: 20px;}
         .label {margin-right: 10px;}
+        .area-bar {background-color: #336699; margin: 2px 0;}
+        form {margin-bottom: 15px;}
      </style>
 <head>
 
@@ -44,24 +46,24 @@
         <h3 ng-bind-template="Drill {{drill}}"></h3>
 
         <div id="drill" ng-init="showScreenshot=false;">
-            - Countries have now a new property available: area (in square km)<br/>
-            - Add two choices in the dropdown to order by area (ascending and descending)</br>
-            - Next to each country name, displays a bar according to the size of their area. A variable 'maxArea' (equals to {{10000000 | number}}) has been added to help sizing each bar<br/>
+            - Using ngClass directive, add label-primary class to continent labels only if one or more countries from this continent are displayed.<br/>
+            - Right now, we struggle to see countries with a small area. Change the sizing of each bar according to which countries are displayed.<br/>
             <button class="btn btn-info" ng-click="showScreenshot=!showScreenshot" ng-bind="showScreenshot ? 'Hide screenshot' : 'Show screenshot'"></button>
-            <img src="screenshots/1.7.png" ng-show="showScreenshot" width="100%">
+            <img src="screenshots/1.8.png" ng-show="showScreenshot" width="100%">
         </div>
 
         <div id="help">
             <ul>
                 <li>Bootstrap css docs: <a href="http://getbootstrap.com/css">http://getbootstrap.com/css/#forms</a></li>
-                <li>ngStyle: <a href="http://docs.angularjs.org/api/ng/directive/ngStyle">http://docs.angularjs.org/api/ng/directive/ngStyle</a></li>
-                <li>ngAttr attribute binding: <a href="http://docs.angularjs.org/guide/directive">http://docs.angularjs.org/guide/directive</a></li>
+                <li>ngClass: <a href="http://docs.angularjs.org/api/ng/directive/ngInit">http://docs.angularjs.org/api/ng/directive/ngClass</a></li>
+                <li>ngChange: <a href="http://docs.angularjs.org/api/ng/directive/ngInit">http://docs.angularjs.org/api/ng/directive/ngChange</a></li>
+                <li>Filters (limitTo may be handy ;)) <a href="http://docs.angularjs.org/api/ng/filter">http://docs.angularjs.org/api/ng/filter</a></li>
             </ul>
         </div>
 
         <div class="separator"> </div>
 
-        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe',area:640427},{name:'Canada',continent:'North America',area:9093507},{name:'China',continent:'Asia',area:9569901},{name:'Algeria',continent:'Africa',area:2381741},{name:'Italy',continent:'Europe',area:294140},{name:'Fiji',continent:'Oceania',area:18274},{name:'Vietnam',continent:'Asia',area:310070},{name:'India',continent:'Asia',area:2973193},{name:'Kenya',continent:'Africa',area:569140},{name:'Brasil',continent:'South America',area:8460415},{name:'Japan',continent:'Asia',area:364485},{name:'Argentina',continent:'South America',area:2736690},{name:'Austria',continent:'Europe',area:82445},{name:'Ivory Coast',continent:'Africa',area:318003},{name:'South Africa',continent:'Africa',area:1214470},{name:'Tunisia',continent:'Africa',area:155360},{name:'Denmark',continent:'Europe',area:42434},{name:'Thailand',continent:'Asia',area:510890},{name:'United States of America',continent:'North America',area:9158960},{name:'Slovenia',continent:'Europe',area:20151},{name:'New Zealand',continent:'Oceania',area:262443},{name:'Australia',continent:'Oceania',area:7682300},{name:'Mexico',continent:'North America',area:1943945},{name:'Chile',continent:'South America',area:743812},{name:'Peru',continent:'South America',area:1279996}];order='+name';maxArea=10000000;">
+        <div id="your-part" ng-init="continents=[{name: 'Europe'}, {name: 'Africa'}, {name: 'Asia'}, {name: 'North America'}, {name: 'South America'}, {name: 'Oceania'}];reverse=false;countries=[{name:'France',continent:'Europe',area:640679},{name:'Canada',continent:'North America',area:9984670},{name:'China',continent:'Asia',area:9706961},{name:'Algeria',continent:'Africa',area:2381741},{name:'Italy',continent:'Europe',area:301336},{name:'Fiji',continent:'Oceania',area:18272},{name:'Vietnam',continent:'Asia',area:331212},{name:'India',continent:'Asia',area:3287590},{name:'Kenya',continent:'Africa',area:580367},{name:'Brasil',continent:'South America',area:8515767},{name:'Japan',continent:'Asia',area:377930},{name:'Argentina',continent:'South America',area:2780400},{name:'Austria',continent:'Europe',area:83871},{name:'Côte d\'Ivoire',continent:'Africa',area:322463},{name:'South Africa',continent:'Africa',area:1221037},{name:'Tunisia',continent:'Africa',area:163610},{name:'Denmark',continent:'Europe',area:43094},{name:'Thailand',continent:'Asia',area:513120},{name:'United States of America',continent:'North America',area:9629091},{name:'Slovenia',continent:'Europe',area:20273},{name:'New Zealand',continent:'Oceania',area:270467},{name:'Australia',continent:'Oceania',area:7692024},{name:'Mexico',continent:'North America',area:1964375},{name:'Chile',continent:'South America',area:756102},{name:'Peru',continent:'South America',area:1285216}];order='-area';maxArea=10000000;">
 
 
             <!-- Controls -->
@@ -69,7 +71,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Filter countries</label>
                     <div class="col-sm-6">
-                        <input type="text" ng-model="search" class="form-control"/>
+                        <input type="text" ng-model="search" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -78,6 +80,8 @@
                         <select ng-model="order" class="form-control">
                             <option value="+name">Name (A-Z)</option>
                             <option value="-name">Name (Z-A)</option>
+                            <option value="-area">Area (+ to -)</option>
+                            <option value="+area">Name (- to +)</option>
                         </select>
                     </div>
                 </div>
@@ -94,9 +98,12 @@
             </form>
 
             <!-- countries -->
-            <ul>
-                <li ng-repeat="country in countries | filter:search | orderBy:order" ng-bind="country.name">z</li>
-            </ul>
+            <div class="row" ng-repeat="country in countries | filter:search | orderBy:order">
+                <div class="col-sm-3" ng-bind="country.name" style="text-align: right;"></div>
+                <div class="col-sm-8">
+                    <div ng-style="{'width': (country.area*100/maxArea)+'%'}" class="area-bar">&nbsp;</div>
+                </div>
+            </div>
 
         </div>
 
