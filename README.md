@@ -5,7 +5,7 @@ Set-up
 ------
 You need to serve `index.hml` so it can be accessed by your browser. You can use [http-server](https://www.npmjs.com/package/http-server):
 
-  $ npm install -g http-server
+    $ npm install -g http-server
 
 Then, run `http-server` and navigate to `localhost:8080`.
 
