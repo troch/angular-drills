@@ -3,9 +3,11 @@ angular-drills
 
 Set-up
 ------
-You need somewhere to place `index.hml` so it can be accessed in your browser.
+You need to serve `index.hml` so it can be accessed by your browser. You can use [http-server](https://www.npmjs.com/package/http-server):
 
-If you don't have a local http server running, I recommend using nginx http://wiki.nginx.org/Main.
+  $ npm install -g http-server
+
+Then, run `http-server` and navigate to `localhost:8080`.
 
 Performing the drills
 ---------------------
@@ -16,7 +18,7 @@ Part 1 - Working in the view
 ----------------------------
 The aim of "Angular drills part 1" is to focus on the view by using native angularJS directives, to play with UI states and to resist the temptation to use controllers or directives.
 
-During part one, all drills have to be performed `without the use of any controller or custom directive`.
+During part one, all drills have to be performed __without the use of any controller or custom directive__.
 
 List of drills (with tags):
 - 1.1: Filtered ng-repeat
